@@ -2,10 +2,12 @@ name: Build standalone Windows app
 
 on:
   push:
+    branches: [main, master]
+    tags: ["v*"]
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build-windows:
@@ -32,3 +34,9 @@ jobs:
           path: dist/TxtToEpub.exe
           if-no-files-found: error
           retention-days: 30
+
+      - name: Publish GitHub release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$env:GITHUB_REF_NAME" dist/TxtToEpub.exe --title "TXT to EPUB $env:GITHUB_REF_NAME" --generate-notes

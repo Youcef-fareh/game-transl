@@ -28,10 +28,14 @@ In the app, add the source TXT file(s), choose whether to create separate EPUBs 
 
 The **Build standalone Windows app** workflow builds `TxtToEpub.exe` on GitHub Actions. It is a portable, single-file executable; users do not need to install Python or run a post-install step.
 
-1. Push to the `main` or `master` branch, or start the workflow manually from the repository's **Actions** tab.
-2. Open the completed workflow run.
-3. Download the `TxtToEpub-Windows` artifact.
-4. Extract the ZIP and run `TxtToEpub.exe`.
+To publish a versioned release, push a version tag such as `v1.0.0`. The workflow builds the Windows executable and attaches it to a GitHub Release automatically.
+
+For a versioned release:
+
+1. Open the repository's **Releases** page.
+2. Download `TxtToEpub.exe` from the latest release.
+
+For other builds, push to the `main` or `master` branch, or start the workflow manually from the repository's **Actions** tab, then download the `TxtToEpub-Windows` artifact from the completed run.
 
 The executable is built by GitHub Actions, not as part of the local development instructions.
 
